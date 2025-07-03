@@ -1,14 +1,16 @@
 async function getEmoji() {
-    const res = await fetch("https://emojihub.yurace.pro/api/all")
-    const emoji = await res.json()
-    emojilist = ""
-    console.log(emoji);
-    emoji.forEach(emojig => {
-        emojilist +=
-        emojig.category +" "+
-        emojig.group +" "+ "<br>"
-});
+  const res = await fetch("https://emojihub.yurace.pro/api/all");
+  const emojis = await res.json();
+  let emojilist = "";
 
-    document.getElementById("emoji").innerHTML = emojilist
+  emojis.forEach(emoji => {
+    emojilist += `
+      <div class="emoji-item">
+        <span class="emoji">${emoji.htmlCode[0]}</span>
+        <span class="label">${emoji.name}</span>
+      </div>
+    `;
+  });
 
+  document.getElementById("emoji").innerHTML = emojilist;
 }
